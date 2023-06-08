@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import connection.DbConnection;
@@ -64,7 +60,7 @@ public class Customer_ServiceDAO {
         return csList;
     }
     
-   public String autoID() {
+    public String autoID() {
         Connection connection = dbConnection.makeConnection();
         String id = null;
         String template = "CUS-";
@@ -77,13 +73,14 @@ public class Customer_ServiceDAO {
             if (resultSet.next()) {
                 String lastID = resultSet.getString("cs_id");
                 System.out.println("Last ID: " + lastID);
-                int num = Integer.parseInt(lastID.substring(template.length()));
-                System.out.println("Extracted Number: " + num);
+                String extractedNum = lastID.substring(template.length()); // Mengambil angka setelah template
+                System.out.println("Extracted Number: " + extractedNum);
+                int num = Integer.parseInt(extractedNum);
                 int nextNum = num + 1;
-                String Snum = Integer.toString(nextNum);
+                String Snum = String.format("%02d", nextNum); // Format angka menjadi dua digit dengan leading zero jika perlu
                 id = template + Snum;
             } else {
-                id = template + "1";
+                id = template + "01"; // Jika tidak ada data sebelumnya, gunakan nomor 01
             }
 
             resultSet.close();
@@ -94,6 +91,7 @@ public class Customer_ServiceDAO {
 
         return id;
     }
+
 
     
     public void insertCustomerService(Customer_Service c){
@@ -153,6 +151,25 @@ public class Customer_ServiceDAO {
         return c;
     }
     
+    public Customer_Service showCSby(String query){
+        Connection connection = dbConnection.makeConnection();
+
+        String sql = "SELECT * FROM customer_service WHERE cs_id LIKE '%" + query + "%' OR username LIKE '%" + query + "%' OR password LIKE '%" + query + "%' OR nama LIKE '%" + query + "%' OR tanggal_lahir LIKE '%" + query + "%' OR gaji LIKE '%" + query + "%' ORDER BY cs_id";
+        System.out.println("Mengambil data Customer Service..");
+        Customer_Service c = null;
+
+        try{
+            c = fetch(sql, connection); // Menggunakan query 'sql' yang telah didefinisikan sebelumnya
+        }catch(Exception e){
+            System.out.println("Error while trying to fetch Customer Service!");
+            System.out.println(e.getMessage());
+        }finally{
+            dbConnection.closeConnection();
+        }
+        return c;
+    }
+
+    
     public void updateCS(Customer_Service c, String id){
         Connection connection = dbConnection.makeConnection();
         
@@ -194,7 +211,7 @@ public class Customer_ServiceDAO {
     public List<Customer_Service> showCS(String query){
         Connection connection = dbConnection.makeConnection();
         
-        String sql = "SELECT * FROM customer_service WHERE cs_id LIKE '%" + query + "%' OR username LIKE '%" + query + "%' OR password LIKE '%" + query + "%' OR nama LIKE '%" + query + "%' OR tanggal_lahir LIKE '%" + query + "%' OR gaji LIKE '%" + query + "%' ORDER BY cs_id";
+        String sql = "SELECT * FROM customer_service WHERE cs_id LIKE 'CUS-%' ORDER BY CAST(SUBSTRING(cs_id, 5) AS UNSIGNED)";
         System.out.println("Mengambil data Customer Service..");
         
         List<Customer_Service> list = new ArrayList<>();
@@ -227,6 +244,8 @@ public class Customer_ServiceDAO {
         
         return list;
     }
+    
+    
     
     public boolean authenticateUser(String username, String password) throws SQLException {
         Connection con = dbConnection.makeConnection();
