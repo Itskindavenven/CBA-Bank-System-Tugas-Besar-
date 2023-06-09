@@ -2,6 +2,4 @@
 Java Netbeans program with view, Bank Case
 
 ERD Database:
-
-![ERD_FINAL_CBA BANK drawio](https://github.com/Itskindavenven/CBA-Bank-System-Tugas-Besar-/assets/99861954/fd6f985b-69fe-4d3b-bf88-9f5edb56bdef)
-
+![CBA BANK_ERD drawio](https://github.com/Itskindavenven/CBA-Bank-System-Tugas-Besar-/assets/99861954/e241ae76-17b9-4492-8118-7b87ed93addb)
