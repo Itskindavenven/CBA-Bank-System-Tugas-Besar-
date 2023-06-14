@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import exception.PasswordException;
 import exception.UsernameException;
 import exception.InvalidInputanKosongException;
+import exception.InputKosongException;
 
 public class ManajerTellerPage extends javax.swing.JFrame {
 
@@ -69,6 +70,12 @@ public class ManajerTellerPage extends javax.swing.JFrame {
         tableTeller.setModel((TableModel) tlControl.showTeller(""));
     }
     
+    public void inputKosongException() throws InputKosongException{
+        if(namaJtext.getText().isEmpty() || usernameJtext.getText().isEmpty() || passwordJtext.getText().isEmpty()
+                || tanggalLahirJtext.getText().isEmpty() || gajiJtext.getText().isEmpty()){
+            throw new InputKosongException();
+        }
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -196,6 +203,11 @@ public class ManajerTellerPage extends javax.swing.JFrame {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        tableTeller.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableTellerMouseClicked(evt);
             }
         });
         jScrollPane3.setViewportView(tableTeller);
@@ -480,7 +492,7 @@ public class ManajerTellerPage extends javax.swing.JFrame {
         setComponent(true);
         clearText();
         setDefaultID();
-        idJtext.setEditable(false);
+        idJtext.setEnabled(false);
         action = "Recruit";
     }//GEN-LAST:event_recruitButtonActionPerformed
 
@@ -511,7 +523,7 @@ public class ManajerTellerPage extends javax.swing.JFrame {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         int i = 0;
         try {
-
+            inputKosongException();
             String gajiStr = gajiJtext.getText().trim();
             double gaji = Double.parseDouble(gajiStr);
             String tanggalLahir = tanggalLahirJtext.getText().trim();
@@ -525,8 +537,8 @@ public class ManajerTellerPage extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(ManagerCSPanel, "Data Berhasil Disimpan");
             i = 1;
-        } catch (Exception e) {
-
+        } catch (InputKosongException e) {
+            JOptionPane.showMessageDialog(this, e.message());
         }
 
         if (i == 1) {
@@ -542,6 +554,24 @@ public class ManajerTellerPage extends javax.swing.JFrame {
         setEditDeleteBtn(false);
         clearText();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void tableTellerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableTellerMouseClicked
+        int indexTeller = -1;
+        int selectedId = 0;
+        setEditDeleteBtn(true);
+        
+        setComponent(false);
+        
+        int clickedRow = tableTeller.getSelectedRow();
+        TableModel tableModel = tableTeller.getModel();
+        
+        idJtext.setText(tableModel.getValueAt(clickedRow, 0).toString());
+        namaJtext.setText(tableModel.getValueAt(clickedRow, 1).toString());
+        usernameJtext.setText(tableModel.getValueAt(clickedRow, 2).toString());
+        tanggalLahirJtext.setText(tableModel.getValueAt(clickedRow, 3).toString());
+        gajiJtext.setText(tableModel.getValueAt(clickedRow, 4).toString());
+        
+    }//GEN-LAST:event_tableTellerMouseClicked
 
     public void setEditDeleteBtn(boolean value){
         updateButton.setEnabled(value);
