@@ -224,7 +224,7 @@ public class ManajerBOPage extends javax.swing.JFrame {
         labelNama.setText("Nama");
 
         usernameLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        usernameLabel.setText("Password");
+        usernameLabel.setText("Username");
 
         namaJtext.setColumns(20);
         namaJtext.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
