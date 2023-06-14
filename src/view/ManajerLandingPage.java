@@ -237,7 +237,12 @@ public class ManajerLandingPage extends javax.swing.JFrame {
     }                                            
 
     private void BOButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+        ManajerBOPage t = new ManajerBOPage();
+        ManajerLandingPage m = new ManajerLandingPage();
+        
+        t.setVisible(true);
+        m.setVisible(false);
+        dispose();
     }                                        
 
     /**
