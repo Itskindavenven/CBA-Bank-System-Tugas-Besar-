@@ -12,6 +12,10 @@ import table.TableBO;
 public class Back_OfficeControl {
     private final Back_OfficeDAO bDAO = new Back_OfficeDAO();
     
+    public String AutoID(){
+        return bDAO.autoID();
+    }
+    
     public void insertDataBO(Back_Office b){
         bDAO.insertBO(b);
     }
@@ -33,6 +37,10 @@ public class Back_OfficeControl {
         TableBO tableBO = new TableBO(dataBack_Offices);
         
         return tableBO;
+    }
+    
+    public Back_Office showBOby(String query){
+        return bDAO.showBOby(query);
     }
     
     public boolean authenticateUser(String username, String password) {
