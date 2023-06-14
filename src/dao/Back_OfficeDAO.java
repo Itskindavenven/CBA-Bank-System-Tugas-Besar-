@@ -66,10 +66,10 @@ public class Back_OfficeDAO {
          try{
              Statement statement = connection.createStatement();
             int result = statement.executeUpdate(query);
-            System.out.println("Added " + result + " Teller!");
+            System.out.println("Added " + result + " Back Office!");
             statement.close();
          }catch(Exception e){
-            System.out.println("Error while trying to add new Teller!");
+            System.out.println("Error while trying to add new Back Office!");
             System.out.println(e.getMessage());
          }finally{
              dbConnection.closeConnection();
@@ -205,7 +205,7 @@ public class Back_OfficeDAO {
     public List<Back_Office> showBO(String query){
         Connection connection = dbConnection.makeConnection();
         
-        String sql = "SELECT * FROM back_office WHERE bo_id LIKE '%" + query + "%' OR username LIKE '%" + query + "%' OR password LIKE '%" + query + "%' OR nama LIKE '%" + query + "%' OR tanggal_lahir LIKE '%" + query + "%' OR gaji LIKE '%" + query + "%' ORDER BY teller_id";
+        String sql = "SELECT * FROM back_office WHERE bo_id LIKE '%" + query + "%' OR username LIKE '%" + query + "%' OR password LIKE '%" + query + "%' OR nama LIKE '%" + query + "%' OR tanggal_lahir LIKE '%" + query + "%' OR gaji LIKE '%" + query + "%' ORDER BY bo_id";
         System.out.println("Mengambil data Back Office..");
         
         List<Back_Office> list = new ArrayList<>();
