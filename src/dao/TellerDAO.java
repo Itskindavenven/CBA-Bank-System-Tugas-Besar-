@@ -192,6 +192,24 @@ public class TellerDAO {
         return list;
     }
     
+    public Teller showTellerby(String query){
+        Connection connection = dbConnection.makeConnection();
+
+        String sql = "SELECT * FROM teller WHERE teller_id LIKE '%" + query + "%' OR username LIKE '%" + query + "%' OR password LIKE '%" + query + "%' OR nama LIKE '%" + query + "%' OR tanggal_lahir LIKE '%" + query + "%' OR gaji LIKE '%" + query + "%' ORDER BY cs_id";
+        System.out.println("Mengambil data Teller..");
+        Teller c = null;
+
+        try{
+            c = fetch(sql, connection); // Menggunakan query 'sql' yang telah didefinisikan sebelumnya
+        }catch(Exception e){
+            System.out.println("Error while trying to fetch Teller!");
+            System.out.println(e.getMessage());
+        }finally{
+            dbConnection.closeConnection();
+        }
+        return c;
+    }
+    
     public boolean authenticateUser(String username, String password) throws SQLException {
         Connection con = dbConnection.makeConnection();
 
@@ -205,5 +223,36 @@ public class TellerDAO {
         return resultSet.next();
     }
     
+    public String autoID() {
+        Connection connection = dbConnection.makeConnection();
+        String id = null;
+        String template = "TEL-";
+
+        try {
+            Statement statement = connection.createStatement();
+            String sqlQuery = "SELECT teller_id FROM teller ORDER BY teller_id DESC LIMIT 1";
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+
+            if (resultSet.next()) {
+                String lastID = resultSet.getString("teller_id");
+                System.out.println("Last ID: " + lastID);
+                String extractedNum = lastID.substring(template.length()); // Mengambil angka setelah template
+                System.out.println("Extracted Number: " + extractedNum);
+                int num = Integer.parseInt(extractedNum);
+                int nextNum = num + 1;
+                String Snum = String.format("%02d", nextNum); // Format angka menjadi dua digit dengan leading zero jika perlu
+                id = template + Snum;
+            } else {
+                id = template + "01"; // Jika tidak ada data sebelumnya, gunakan nomor 01
+            }
+
+            resultSet.close();
+            statement.close();
+        } catch (Exception e) {
+            System.out.println("Error generating auto ID: " + e.getMessage());
+        }
+
+        return id;
+    }
     
 }
