@@ -149,7 +149,7 @@ public class Back_OfficeDAO {
     public Back_Office showBOby(String query){
         Connection connection = dbConnection.makeConnection();
 
-        String sql = "SELECT * FROM back_office WHERE bo_id LIKE '%" + query + "%' OR username LIKE '%" + query + "%' OR password LIKE '%" + query + "%' OR nama LIKE '%" + query + "%' OR tanggal_lahir LIKE '%" + query + "%' OR gaji LIKE '%" + query + "%' ORDER BY cs_id";
+        String sql = "SELECT * FROM back_office WHERE bo_id LIKE '%" + query + "%' OR username LIKE '%" + query + "%' OR password LIKE '%" + query + "%' OR nama LIKE '%" + query + "%' OR tanggal_lahir LIKE '%" + query + "%' OR gaji LIKE '%" + query + "%' ORDER BY bo_id";
         System.out.println("Mengambil data Customer Service..");
         Back_Office b = null;
 
