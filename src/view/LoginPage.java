@@ -245,6 +245,13 @@ public class LoginPage extends javax.swing.JFrame {
         if (isAuthenticatedBO) {
             System.out.println("Login Back Office berhasil!");
             i = 1;
+            BOLandingPage t = new BOLandingPage();
+            LoginPage l = new LoginPage();
+            
+            l.setVisible(false);
+            t.setVisible(true);
+            
+            dispose();
         }
         
         if(i==0){
