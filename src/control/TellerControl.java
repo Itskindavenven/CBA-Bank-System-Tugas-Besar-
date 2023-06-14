@@ -12,6 +12,10 @@ import table.TableTeller;
 public class TellerControl {
     private final TellerDAO tDAO = new TellerDAO();
     
+    public String AutoID(){
+        return tDAO.autoID();
+    }
+    
     public void insertDataTeller(Teller t){
         tDAO.insertTeller(t);
     }
@@ -33,6 +37,10 @@ public class TellerControl {
         TableTeller tableTeller = new TableTeller(dataTeller);
         
         return tableTeller;
+    }
+    
+    public Teller showTellerby(String query){
+        return tDAO.showTellerby(query);
     }
     
     public boolean authenticateUser(String username, String password) {
