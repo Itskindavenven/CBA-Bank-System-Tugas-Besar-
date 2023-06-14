@@ -222,8 +222,9 @@ public class ManajerLandingPage extends javax.swing.JFrame {
         ManajerCSPage c = new ManajerCSPage();
         ManajerLandingPage m = new ManajerLandingPage();
         
-        c.setVisible(true);
         m.setVisible(false);
+        c.setVisible(true);
+        
         dispose();
     }                                        
 
@@ -231,8 +232,9 @@ public class ManajerLandingPage extends javax.swing.JFrame {
         ManajerTellerPage t = new ManajerTellerPage();
         ManajerLandingPage m = new ManajerLandingPage();
         
-        t.setVisible(true);
         m.setVisible(false);
+        t.setVisible(true);
+        
         dispose();
     }                                            
 
@@ -240,8 +242,9 @@ public class ManajerLandingPage extends javax.swing.JFrame {
         ManajerBOPage t = new ManajerBOPage();
         ManajerLandingPage m = new ManajerLandingPage();
         
-        t.setVisible(true);
         m.setVisible(false);
+        t.setVisible(true);
+        
         dispose();
     }                                        
 

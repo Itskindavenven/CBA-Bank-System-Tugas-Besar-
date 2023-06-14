@@ -206,8 +206,9 @@ public class LoginPage extends javax.swing.JFrame {
             ManajerLandingPage m = new ManajerLandingPage();
             LoginPage l = new LoginPage();
             
-            m.setVisible(true);
             l.setVisible(false);
+            m.setVisible(true);
+            
             dispose();
         }
 
@@ -219,8 +220,9 @@ public class LoginPage extends javax.swing.JFrame {
             CSLandingPage cs = new CSLandingPage();
             LoginPage l = new LoginPage();
             
-            cs.setVisible(true);
             l.setVisible(false);
+            cs.setVisible(true);
+            
             dispose();
         }
 
@@ -232,8 +234,9 @@ public class LoginPage extends javax.swing.JFrame {
             TellerLandingPage t = new TellerLandingPage();
             LoginPage l = new LoginPage();
             
-            t.setVisible(true);
             l.setVisible(false);
+            t.setVisible(true);
+            
             dispose();
         }
 
